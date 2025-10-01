@@ -1,0 +1,537 @@
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Love Is Blind 2025 Bingo 🎉</title>
+<style>
+    /* ========== Base ========== */
+  body {
+    font-family: "Hanken Grotesk", sans-serif; /* Body font */
+    margin: 0;
+    background: #F8E9DD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 {
+    font-family: "Baloo 2", sans-serif; /* Titles */
+    text-align: center;             /* Keep centered */
+    color: #097B85;                 /* Title Color */
+  }
+
+  button {
+    font-family: "Baloo 2", sans-serif; /* Buttons too */
+  }
+  
+    /* ========== NEW container for layout ========== */
+  .container {
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: flex-start;   /* top-aligned */
+  gap: 24px;                 /* space between bingo + word list */
+  flex-wrap: wrap;           /* allow wrapping on mobile */
+  margin: 20px auto;
+  max-width: 95%;
+  }
+
+  /* ========== Bingo grid ========== */
+  #controls label,
+  #newWordInput,
+  #addWordBtn,
+  .cell,
+  #wordCount,
+  #wordListContainer {
+    font-family: "Hanken Grotesk", sans-serif; /* Body text */
+    border: 2px solid #4B4B7C;
+    border-radius: 6px;
+    background: #f9f9f9;
+    padding: 12px; /* optional, adds space inside the box */
+    max-width: 400px;
+    
+    /* Center container and content */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #wordListContainer ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .category-section {
+    margin-bottom: 16px; /* space between categories */
+  }
+
+  .category-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  #bingo {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* exactly 5 equal columns */
+    gap: 2px;
+    margin: 10px auto;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .cell {
+    background: white;
+    width: 100%;           /* take full column width */
+    border: 2px solid #4B4B7C;
+    border-radius: 6px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px;
+    user-select: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    max-width: 140px;       /* max cell width */
+    box-sizing: border-box;
+    height: auto;           /* allows height to grow with text */
+    word-wrap: break-word;  /* wrap long words */
+  }
+  
+      /* ========== Category colors ========== */
+  .cell.mentions { color: #4B4B7C; }      /* DARK PURPLE */
+  .cell.quotes { color: #D69F40; }  /* DEEP YELLOW */
+  .cell.icks { color: #A0526D; }   /* DUSTY ROSE */
+  .cell.looks { color: #5A9367; }/* SAGE GREEN */
+
+  .cell.free {
+    background: #a3d2ca;
+    font-weight: bold;
+    cursor: default;
+  }
+
+  .cell.marked {
+    background: #ffb703;
+    color: white;
+  }
+
+  /* ========== Controls ========== */
+  #controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;          /* horizontal spacing between buttons and checkbox */
+    flex-wrap: wrap;     /* wrap items on small screens */
+    margin: 16px 0;
+    justify-content: center;
+  }
+
+  #controls label {
+    display: flex;       /* align checkbox and text horizontally */
+    align-items: center;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  #controls input[type="checkbox"] {
+    margin-right: 6px;   /* spacing between checkbox and text */
+  }
+
+  button {
+    font-size: 16px;
+    padding: 10px 18px;
+    border: 2px solid #4B4B7C;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #EDB758;
+    color: #333333;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background: #E99968;
+  }
+
+  select {
+    font-size: 14px;
+    max-width: 90%;
+  }
+
+    /* ========== Word List ========== */
+  #wordListContainer {
+  font-family: "Hanken Grotesk", sans-serif;
+  border: 2px solid #4B4B7C;
+  border-radius: 6px;
+  background: #f9f9f9;
+  padding: 12px;
+  max-width: 400px;
+  flex: 1;          /* lets it grow/shrink */
+  min-width: 250px; /* prevents squish */
+  }
+  
+  #wordCount {
+    max-width: 300px;
+    margin: 12px auto;
+    font-size: 14px;
+    font-weight: bold;          /* stand out */
+    color: #4B4B7C;             /* theme color */
+    text-align: center;
+    padding: 6px;
+    background: #FFFAE0;       /* light background for contrast */
+  }
+
+  #addWordContainer {
+    max-width: 400px;
+    margin: 8px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* stack input and controls vertically */
+    align-items: center;    /* center everything horizontally */
+    gap: 8px;               /* space between input and the row below */
+  }
+
+  #addWordControls {
+    display: flex;    /* treat as a single block */
+    justify-content: center; /* center the row horizontally */
+    gap: 8px;                /* space between dropdown and button */
+    align-items: center;     /* vertically align dropdown and button */
+    width: auto;            /* shrink to fit content */
+  }
+  
+  #newWordCategory {
+    width: 180px;               /* fixed width so it doesn’t stretch */
+    flex: none;                 /* prevent it from expanding */
+  }
+
+  #newWordInput {
+    width: 75%;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  #addWordBtn {
+    padding: 6px 12px;
+    font-size: 14px;
+    margin-left: 8px;
+    background: #B6D5D8;
+    border: 2px solid #4B4B7C;
+    border-radius: 6px;
+    color: #333333;
+    cursor: pointer;
+    flex: none;
+  }
+
+  #addWordBtn:hover {
+    background: #C4B4E1;
+  }
+
+  /* ========== Responsive adjustments ========== */
+  @media (max-width: 480px) {
+    .cell {
+      font-size: 12px;    /* reduce font on small screens */
+      padding: 2px;
+    }
+
+    #controls {
+      gap: 6px;
+    }
+
+    #controls label {
+      font-size: 12px;
+    }
+
+    button {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+  }
+  
+  /* ========== H3 and Bullet Point Colors ========== */
+    /* Bio */
+  .mentions-header, .mentions-list li::marker { color: #4B4B7C; }
+  .quotes-header, .quotes-list li::marker { color: #D69F40; }
+  .icks-header, .icks-list li::marker { color: #A0526D; }
+  .looks-header, .looks-list li::marker { color: #5A9367; }
+  
+  #wordList ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+  
+<body>
+<main class="app">
+  <h1>Hinge Bingo - Boys Edition 🎉</h1>
+
+    <!-- 🔽 bingo grid + word list are children of .container -->
+  <div class="container">
+    <div class="left-col">
+      <div id="bingoWrapper">
+        <div id="bingo" role="grid" aria-label="Bingo board"></div>
+      </div>
+
+      <!-- Controls -->
+      <div id="controls">
+        <button id="randomizeBtn">Randomize</button>
+        <button id="clearBtn">Clear</button>
+        <label>
+          <input type="checkbox" id="manualFillToggle" />
+          Manual Fill Mode
+        </label>
+      </div>
+
+      <div id="addWordContainer">
+        <input type="text" id="newWordInput" placeholder="Add a new option..." />
+
+        <div id="addWordControls">
+          <select id="newWordCategory">
+            <option value="">-- Select category --</option>
+            <option value="mentions">Mentions</option>
+            <option value="quotes">Quotes</option>
+            <option value="icks">Icks</option>
+            <option value="looks">Looks</option>
+          </select>
+
+          <button id="addWordBtn">Add</button>
+        </div>
+      </div>
+
+      
+      <div id="wordCount" aria-live="polite"></div>
+    </div>
+
+    <aside id="wordListContainer" aria-label="Word list">
+      <h2>Option List</h2>
+      <ul id="wordList"></ul>
+    </aside>
+  </div>
+</main>
+
+<script>
+  const gridSize = 5;
+  const words = {
+    mentions: [
+      "Red Rocks concert","EDM / Bass Capitol","Startup","Astrology","Traffic on i-70","Consulting","That one sculpture of wings",
+      "REI","Whole Foods","That one Broncos mural in RiNo","The Populus Hotel","Union Station","Little Man Ice Cream"
+    ],
+    quotes: [
+      "“I love my dog”","“I’m a Colorado Native”","“I’ve never skied”","“What pass do you have?”","“I got 40+ last year”",
+      "“I’m brewing my own beer”","“I’m from Littleton”","“Menver”","“I’m ready to settle down”"
+    ],
+    icks: [
+      "Any negative talk about the dating scene","Peter Pan Syndrome","An entire conversation about weed","CU vs CSU debate","Empower Field"
+    ],
+    looks: [
+      "Patagonia jacket","Bierks","Mustache","REI","Guys are same words, different fonts"
+    ]
+  };
+
+  const bingo = document.getElementById('bingo');
+  const randomizeBtn = document.getElementById('randomizeBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const manualFillToggle = document.getElementById('manualFillToggle');
+  const wordCountDisplay = document.getElementById('wordCount');
+  const newWordInput = document.getElementById('newWordInput');
+  const addWordBtn = document.getElementById('addWordBtn');
+  const wordListElement = document.getElementById('wordList');
+  let manualFillMode = false;
+  let cells = [];
+
+  function shuffle(a){ const arr = a.slice(); for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+
+  function createGrid(){
+    bingo.innerHTML = ''; cells = [];
+    for(let r=0;r<gridSize;r++){
+      for(let c=0;c<gridSize;c++){
+        const cell = document.createElement('div'); cell.className='cell'; cell.dataset.row=r; cell.dataset.col=c;
+        if(r===2 && c===2){ cell.classList.add('free'); cell.textContent='FREE'; cell.dataset.marked='false'; }
+        else{ cell.textContent=''; cell.dataset.marked='false'; }
+        cell.addEventListener('click',()=>onCellClick(cell));
+        bingo.appendChild(cell); cells.push(cell);
+      }
+    }
+  }
+  
+    function getCategory(word) {
+    for (const category in words) {
+      if (words[category].includes(word)) return category;
+    }
+    return null;
+  }
+
+  // Flatten all words into a single array for random use
+  function allWords() {
+    return Object.values(words).flat();
+  }
+
+
+    function randomFill(){
+    const flatWords = allWords();
+    if(flatWords.length < gridSize*gridSize - 1){
+      alert('Not enough words to fill the bingo card.');
+      return;
+    }
+    const shuffled = shuffle(flatWords);
+    let idx = 0;
+
+    for(let r=0;r<gridSize;r++){
+      for(let c=0;c<gridSize;c++){
+        const cell = cells[r*gridSize+c];
+        cell.className = "cell"; // reset classes
+
+        if(r===2 && c===2){
+          cell.textContent = 'FREE';
+          cell.classList.add('free');
+          cell.dataset.marked = 'false';
+        } else {
+          const word = shuffled[idx++];
+          const category = getCategory(word);
+          cell.textContent = word;
+          if (category) cell.classList.add(category);
+          cell.dataset.marked = 'false';
+        }
+      }
+    }
+    updateWordList();
+    updateWordCount();
+  }
+
+  function clearGrid() {
+    cells.forEach(cell => {
+      if (cell.classList.contains('free')) {
+        // Leave FREE space as-is
+        cell.classList.remove('marked');
+        cell.style.backgroundColor = '';
+        cell.dataset.marked = 'false';
+      } else {
+        // Just clear colors/marked state, keep text
+        cell.classList.remove('marked');
+        cell.style.backgroundColor = '';
+        cell.dataset.marked = 'false';
+      }
+    });
+  }
+
+  function onCellClick(cell){
+    if(manualFillMode){ if(cell.classList.contains('free')) return; openWordSelector(cell); return; }
+    if(cell.dataset.marked==='true'){ cell.dataset.marked='false'; cell.classList.remove('marked'); cell.style.backgroundColor=''; }
+    else{ cell.dataset.marked='true'; cell.classList.add('marked'); cell.style.backgroundColor='#D69F40'; }
+  }
+
+function openWordSelector(cell){
+  const select=document.createElement('select'); 
+  select.style.width='100%';
+
+  const empty=document.createElement('option');
+  empty.value='';
+  empty.textContent='-- select word --';
+  select.appendChild(empty);
+
+  // Flatten words into an array
+  const allWordsArray = Object.values(words).flat();
+
+  allWordsArray.forEach(w => {
+    const opt = document.createElement('option');
+    opt.value = w;
+    opt.textContent = w;
+    select.appendChild(opt);
+  });
+
+  select.value=(cell.textContent && cell.textContent!=='FREE')?cell.textContent:'';
+
+  cell.innerHTML='';
+  cell.appendChild(select);
+
+  // 👇 prevent dropdown from closing instantly in Chrome
+  select.focus();
+  select.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+function commit() {
+  const val = select.value.trim();
+  cell.className = "cell"; // reset classes
+
+  if (val) {
+    const category = getCategory(val);
+    if (!category) {
+      alert("Selected word doesn't belong to any category!");
+    }
+    cell.textContent = val;
+    if (category) cell.classList.add(category); // 👈 add category color class
+  } else {
+    cell.textContent = '';
+  }
+  cell.dataset.marked = 'false';
+}
+
+  select.addEventListener('change',()=>{ commit(); });
+  select.addEventListener('blur',()=>{ setTimeout(()=>commit(),100); });
+}
+
+  function updateWordList() {
+    wordListElement.innerHTML = '';
+    for (const category in words) {
+      // Category header
+      const categoryHeader = document.createElement('h3');
+      categoryHeader.textContent = category.toUpperCase();
+      categoryHeader.className = category + "-header";
+      wordListElement.appendChild(categoryHeader);
+
+      // Word list
+      const ul = document.createElement('ul');
+      ul.className = category + "-list";
+      words[category].forEach(w => {
+        const li = document.createElement('li');
+        li.textContent = w;
+        ul.appendChild(li);
+      });
+      wordListElement.appendChild(ul);
+    }
+  }
+  
+  function updateWordCount() {
+    const totalWords = Object.values(words).reduce((sum, arr) => sum + arr.length, 0);
+    wordCountDisplay.textContent = `Option list contains ${totalWords} phrases.`;
+  }
+
+
+  addWordBtn.addEventListener('click', () => {
+    const val = newWordInput.value.trim();
+    const category = document.getElementById('newWordCategory').value;
+
+    if (!val) return alert("Please enter a word.");
+    if (!category) return alert("Please select a category.");
+
+    // Check if the word already exists in that category
+    if (words[category].includes(val)) {
+      return alert('That word already exists in this category.');
+    }
+
+    // Add the word to the selected category
+    words[category].push(val);
+
+    // Clear inputs
+    newWordInput.value = '';
+    document.getElementById('newWordCategory').value = '';
+
+    // Update the word list and count
+    updateWordList();
+    updateWordCount();
+  });
+
+  manualFillToggle.addEventListener('change',(e)=>{ manualFillMode=e.target.checked; });
+  randomizeBtn.addEventListener('click',()=>randomFill());
+  clearBtn.addEventListener('click',()=>clearGrid());
+
+  createGrid(); randomFill(); updateWordList(); updateWordCount();
+</script>
+</body>
+</html>
