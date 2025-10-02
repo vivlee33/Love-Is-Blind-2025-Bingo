@@ -109,6 +109,7 @@
   .cell.quotes { color: #D69F40; }  /* DEEP YELLOW */
   .cell.icks { color: #A0526D; }   /* DUSTY ROSE */
   .cell.looks { color: #5A9367; }/* SAGE GREEN */
+  .cell.other { color: #292929; }    /* GREY */
 
   .cell.free {
     background: #a3d2ca;
@@ -257,6 +258,7 @@
   .quotes-header, .quotes-list li::marker { color: #D69F40; }
   .icks-header, .icks-list li::marker { color: #A0526D; }
   .looks-header, .looks-list li::marker { color: #5A9367; }
+  .other-header, .other-list li::marker { color: #292929; }
   
   #wordList ul {
     list-style-type: disc;
@@ -297,6 +299,7 @@
             <option value="quotes">Quotes</option>
             <option value="icks">Icks</option>
             <option value="looks">Looks</option>
+            <option value="other">Other</option>
           </select>
 
           <button id="addWordBtn">Add</button>
@@ -330,6 +333,8 @@
     ],
     looks: [
       "Patagonia jacket","Bierks","Mustache","REI","Guys are same words, different fonts"
+    ],
+    other: [
     ]
   };
 
